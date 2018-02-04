@@ -1,21 +1,20 @@
 sudo: false
 language: python
 python:
-    - "3.4"
-    - "3.5"
-    - "3.6"
+- '3.4'
+- '3.5'
+- '3.6'
 install: pip install tox
 before_script:
-    - .travis/bump_version ./ ${AUTOVERSION_INCREMENT} > atlassian/VERSION
+- .travis/bump_version ./ ${AUTOVERSION_INCREMENT} > atlassian/VERSION
 script:
-    - tox
-
+- tox
 deploy:
   provider: pypi
-  user: "cattz"
-  distributions: sdist bdist_wheel
+  user: cattz
   password:
-    secure: py71sMNlWEeqGzmKW4UDnAd/fa+W3uiR+uu881CtjrLankC4NipxH/t2tK4H0OS3zlO6BGpDlfUOiiFROUhwUbSiXeOGtKdQFR9FX9l6h6VDy/AVnAQtNnTPM0cv+YMySEHQmzd4v14ZfwETgrjPGJcI/83AWg/WyRlEQ49LZj6Oa1RsTfWwkdp1xUSRqxNa+dAyp84G8OxlqCCCtPmbpRaBpNld/za7ptk2HpG0Fh5pb2iSpgBkRer6DRCYO+Ao+j82yPLA23uvBq10TLbAACX9P8GjkHSz0z3lBkMnaVDxrw2A3SX1IJiWzFLkSY4EoKakBONxD/FATVcRx3pCKHOWIPNfFUMnQMxpRa+gh1Ot7hy+jVHj9WLVaK96oJTT2kTOj/VA1DHl5mA+SX/BcMqyGD989FbKBWoVBY64YuprO2LlUQDYeJOLyAYkuYMohIogmi5LX/+Gfpt2lNEIRY4SyV6SdSdhCQnIB1nZaE8u/ZW6qF/p57JlN3+sLACNCKHUOw4aFmRiBcLWjBCSuw/gS2J3fbFwKbfcg6tGtF7Oe7D0nDvEXLvXr2UgmSWIhlaz+LTvCMrZWbLg79j+X0qs3f3aUcXoLpEgM4Jz3qhbH6ana8ifk+KrmPp6vwH55U/CNVIOPL1F7WBQ7Ggl68MCcPVusEMoQObwiee1C7g=
+    secure: sknkJzZo2XGshyCk/mnS/XTntd4LNuu92p9xYyF+kHtFU9vS2ImYB4qtAjPDkbgDDFGkwoQs7Ib0uzk1aj90ghJ90MzoAw9WMab6Jwvikr8Ul/cPgEtPG2hHz9zAA9S25s/0I2SGA4OUPSpew7W7Onuy2RIJvEU5piaqmRqQyidjYp6x54VSAKXP8fhoKClGyuwBR9nxzK/H6Eyjm7+Dcf5kG/myNT37vZ/JuoD6jvJ+HPmnz/B1GMDW3C5lolqCzQ1fJM53a/ioQKuua35EA1gU9K+9cMv6wtNlgZPGfSV4MaoJOQNmMXg7RaBXc2jUgMVSL28YqdgFn8kbL8FV7j8MIIMRnoy8fnpppDbIRKnaqP6NUo/nqIoWJ4z3rxzy8Y0QomGbCUaoEltIRKaeYclLG2t4drGPlGhys0snPDVNz7s1ID2mktOyKO1OcDZKjWyouJeG4zBcGMm0x5SBoq2oniZhxwkYJVafLlixPuFeO8HEP8+g7tUo9QDy2mOU7j3yc/qhP6lFMIS8HJ7j1H2DgBrdlf9CwvC5ElMdRjN3uBqsOZWKHk/HarS3suUGpkC6oGK0kMbBAHsYA9ValD8yOeBefw3nVCJSeuXhB0YzONuhvSJD1QBp/wQkOB5OXNSH8UGe2oWO5nJgQtOCI/50Ta7tRUXj+bcR4DN9ci4=
+  distributions: sdist bdist_wheel
   on:
     branch: feature/travis_relase
-    python: "3.6"
+    python: '3.6'
