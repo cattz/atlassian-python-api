@@ -6,9 +6,9 @@ if [[ ( -z ${1+x} ) || ( -z ${2+x} ) ]]; then
 
         Quick and dirty version bump script
         If a variable "BUILD_VERSION" is set, returns that variable as is
-        If "BUILD_VERSION" is not set, returns the bumped version based on last existing tag
-        and appends .devN where N is the build number.
+        If "BUILD_VERSION" is not set, returns the bumped version based on last existing tag 
         (tags get sorted using 'sort -V', nothing fancy here)
+        If the branch is not master, appends .devN where N is the build number.
         If no tags are present, the initial version will be 0.1.0
 
         Expects arguments:
@@ -18,9 +18,16 @@ EOF
     exit 1
 fi
 
+
 repo_path=${1}
 increase=${2:patch}
 
+# Only builds from master are not dev builds
+if [ "${TRAVIS_BRANCH}" == "master" ]; then
+    dev_suffix=""
+else
+    dev_suffix=".dev${BUILD_NUMBER}"
+fi
 
 function autoversion(){
 
@@ -37,7 +44,7 @@ function autoversion(){
 
     # Catch existing no tags case
     if [ -z "${last_tag}" ]; then
-        echo "0.1.0.dev${BUILD_NUMBER}"
+        echo "0.1.0${dev_suffix}"
     else
         a=( ${last_tag//./ } )   # replace points, split into array
         case ${increase} in
@@ -54,12 +61,12 @@ function autoversion(){
             a[2]=0
             ;;
         esac
-        echo "${a[0]}.${a[1]}.${a[2]}.dev${BUILD_NUMBER}"
+        echo "${a[0]}.${a[1]}.${a[2]}${dev_suffix}"
     fi
 }
 
 if [ -n "${BUILD_VERSION+x}" ]; then
-    echo "${BUILD_VERSION}"
+    echo "${BUILD_VERSION}${dev_suffix}"
 else
     autoversion
 fi
